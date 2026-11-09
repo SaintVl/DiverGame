@@ -4,7 +4,7 @@ public class Diver {
     public static final double WORLD_HEIGHT = 720.0; // Расчетная высота игрового мира;
     public static final double HEIGHT = 216.0; // Высота ГГ.
 
-    private static final double GROUND_Y = 612.0; //Уровень дна
+    private static final double GROUND_Y = 670.0; //Уровень дна
     private static final double GRAVITY = 600.0;// Ускорение вниз
     private static final double SWIM_VELOCITY = -350.0;// Вертикальная скорость вверх
 

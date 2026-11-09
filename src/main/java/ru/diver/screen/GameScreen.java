@@ -7,11 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import ru.diver.game.Diver;
+
+import ru.diver.graphics.FarBackground;
 
 import javafx.animation.AnimationTimer;
 
@@ -21,8 +22,12 @@ import java.net.URL;
 public class GameScreen extends StackPane {
 
     private static final long FRAME_DURATION_NANOS = 100_000_000L;
-
     private final Canvas canvas = new Canvas();
+
+    private final FarBackground farBackground = new FarBackground(
+            "/images/diver/idle/backgrounds/far_background.png"
+    );
+
     private final Image [] idleFrame = new Image[19];
     private final Image [] swimmingFrame = new Image[8];
     private Image [] currentFrames = idleFrame;
@@ -186,8 +191,7 @@ public class GameScreen extends StackPane {
 
             GraphicsContext graphics = canvas.getGraphicsContext2D();
 
-            graphics.setFill(Color.web("#123d52"));
-            graphics.fillRect(0, 0, width, height);
+            farBackground.draw(graphics, width, height);
 
             double scale = height / Diver.WORLD_HEIGHT;
 
@@ -196,7 +200,7 @@ public class GameScreen extends StackPane {
                     * diverImage.getWidth()
                     / diverImage.getHeight();
 
-            double diverX = width * 0.15;
+            double diverX = width * 0.2 - diverWidth/2;
             double diverY = diver.getY() * scale;
 
             graphics.drawImage(
