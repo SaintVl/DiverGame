@@ -35,7 +35,7 @@ public class GameScreen extends StackPane {
 
     private final double groundSurfaceY;
 
-    private final Image[] idleFrame = new Image[19];
+    private final Image[] idleFrame = new Image[10];
     private final Image[] swimmingFrame = new Image[8];
     private Image[] currentFrames = idleFrame;
     private final AnimationTimer animationTimer;
@@ -47,7 +47,7 @@ public class GameScreen extends StackPane {
     public GameScreen(Runnable onBack) {
         for (int i = 0; i < idleFrame.length; i++) {
             String path = "/images/diver/idle/"
-                    + "__diver_idle_holding_hand_weapon_%03d.png".formatted(i);
+                    + "__diver_walk_%03d.png".formatted(i);
 
             URL imageUrl = getClass().getResource(path);
 
@@ -116,6 +116,8 @@ public class GameScreen extends StackPane {
                 previousTime = now;
 
                 deltaTime = Math.min(deltaTime, 0.05);
+                //farBackground.update(deltaTime);
+                ground.update(deltaTime);
                 diver.update(deltaTime);
 
                 Image[] nextFrames;
@@ -230,7 +232,8 @@ public class GameScreen extends StackPane {
                     graphics,
                     width,
                     height,
-                    groundSurfaceY *scale
+                    groundSurfaceY *scale,
+                    scale
             );
 
 
@@ -240,7 +243,7 @@ public class GameScreen extends StackPane {
                     * diverImage.getWidth()
                     / diverImage.getHeight();
 
-            double diverX = width * 0.15 - diverWidth/2;
+            double diverX = width * 0.38 - diverWidth/2;
             double diverY = diver.getY() * scale;
 
             graphics.drawImage(
